@@ -47,15 +47,15 @@ const MainNavBar = () => {
     >
       <StyledToolBar>
         <Link to='/' className='text-link'>
-          <Typography variant='h6' color='dodgerblue' noWrap xs={{flexGrow: 1}} fontWeight={700}>
+          <Typography variant='h6' color='black' noWrap xs={{flexGrow: 1}} fontWeight={700}>
             GAMADEMY
           </Typography>
         </Link>
-        <Box display='flex' gap={2}>
+        <Box display='flex' gap={2} flexGrow={8} justifyContent='center'>
           {navBtns.map((btn) => {
             return (
               <Link key={btn.page} to={btn.to} className='text-link'>
-                <Button color='info'>
+                <Button color='black'>
                   {btn.page}
                 </Button>
               </Link>

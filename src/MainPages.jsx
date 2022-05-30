@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import MainNavBar from "./components/MainNavBar";
 import CoursesPage from "./pages/CoursesPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import Footer from "./components/Footer";
 
 const MainPages = () => {
   return (
@@ -18,6 +19,7 @@ const MainPages = () => {
           <Route path='/' element={<Home/>}/>
         </Routes>
       </Box>
+      <Footer/>
     </>
   );
 };

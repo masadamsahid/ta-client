@@ -7,7 +7,7 @@ const Login = () => {
     <Stack minHeight={'100vh'}>
       <Stack my='auto'>
         <Typography className='text-link' variant='h3' fontWeight={700} textAlign='center' mb='40px' component={RLink} to='/'>
-          ARTKADEMI
+          GAMADEMY
         </Typography>
         <Box
           sx={{

@@ -8,6 +8,6 @@ export const theme = createTheme({
     },
     black: {
       main: grey[900]
-    }
+    },
   }
 })

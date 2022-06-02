@@ -42,8 +42,9 @@ const MainNavBar = () => {
 
   return (
     <AppBar
-      position='sticky'
-      color='white'
+      position='static'
+      color='transparent'
+      elevation={0}
     >
       <StyledToolBar>
         <Link to='/' className='text-link'>

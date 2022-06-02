@@ -12,7 +12,7 @@ const MainPages = () => {
   return (
     <>
       <MainNavBar/>
-      <Box>
+      <Box minHeight='70vh'>
         <Routes>
           <Route path='/about' exact element={<AboutUsPage/>}/>
           <Route path='/courses' exact element={<CoursesPage/>}/>

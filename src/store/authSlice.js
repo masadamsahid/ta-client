@@ -21,12 +21,8 @@ const authSlice = createSlice({
   reducers: {
     login: (state, { payload }) => {
       const decodedJWToken = jwtDecode(payload.token);
-      if (['admin', 'tutor'].includes(decodedJWToken.role)){
-        localStorage.setItem('jwtoken', payload.token);
-        state.selfUser = decodedJWToken;
-      }else {
-        state.selfUser = null;
-      }
+      localStorage.setItem('jwtoken', payload.token);
+      state.selfUser = decodedJWToken;
     },
     logout: (state, action) => {
       localStorage.removeItem('jwtoken');

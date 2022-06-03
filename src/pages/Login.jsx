@@ -5,7 +5,7 @@ import {useMutation} from "@apollo/client";
 import gql from "graphql-tag";
 import {useDispatch, useSelector} from "react-redux";
 import {authActions} from "../store/authSlice";
-import {LoginOutlined} from "@mui/icons-material";
+import {ExitToApp} from "@mui/icons-material";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,16 +52,27 @@ const Login = () => {
         >
           <form onSubmit={login}>
             <Stack padding={2} gap={1} bgcolor='#fff'>
-              <TextField label='username/email' value={usernameEmail} onChange={({target:{value}})=>setUsernameEmail(value)}/>
-              <TextField label='password' type='password' value={password} onChange={({target:{value}})=>setPassword(value)}/>
+              <TextField
+                label='username/email'
+                value={usernameEmail}
+                onChange={({target:{value}})=>setUsernameEmail(value)}
+                required
+              />
+              <TextField
+                label='password'
+                type='password'
+                value={password}
+                onChange={({target:{value}})=>setPassword(value)}
+                required
+              />
               <Button
                 fullWidth
                 type='submit'
                 variant='contained'
                 disabled={loading}
-                startIcon={loading ? <CircularProgress size={20} thickness={7} color='inherit'/> : <LoginOutlined/>}
+                endIcon={loading ? <CircularProgress size={20} thickness={7} color='inherit'/> : <ExitToApp/>}
               >
-                {loading ? 'loading response' : 'Login'}
+                {loading ? 'loading' : 'Login'}
               </Button>
               <p>
                 Belum memiliki akun? <RLink to='/register'>Daftar</RLink>

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {AppBar, Avatar, Box, Button, Divider, IconButton, Menu, MenuItem, MenuList, styled, Toolbar, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {authActions} from "../store/authSlice";
 
 const navBtns = [
   {
@@ -24,6 +25,8 @@ const StyledToolBar = styled(Toolbar)({
 })
 
 const MainNavBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {selfUser} = useSelector(store => store.auth);
   console.log(selfUser)
 
@@ -38,6 +41,11 @@ const MainNavBar = () => {
   function handleAvatarMenuClose() {
     setProfileMenuOpen(false);
     setProfileMenuAnchEl(null);
+  }
+
+  function logout() {
+    dispatch(authActions.logout());
+    navigate('/login');
   }
 
   return (
@@ -82,7 +90,7 @@ const MainNavBar = () => {
                     Profile
                   </MenuItem>
                   <Divider/>
-                  <MenuItem>
+                  <MenuItem onClick={logout}>
                     Logout
                   </MenuItem>
                 </MenuList>

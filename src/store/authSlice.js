@@ -29,10 +29,12 @@ const authSlice = createSlice({
       }
     },
     logout: (state, action) => {
-      localStorage.removeItem('jwtoken')
-      state.selfUser = null
+      localStorage.removeItem('jwtoken');
+      state.selfUser = null;
     },
   }
 });
+
+export const authActions = authSlice.actions;
 
 export default authSlice;

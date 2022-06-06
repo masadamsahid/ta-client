@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import {useQuery} from "@apollo/client";
 import gql from 'graphql-tag';
+import CourseCard from "../components/CourseCard";
 
-const DEFAULT_THUMBNAIL = 'https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces,q_auto/https://www.gcu.edu/sites/default/files/2020-09/programming.jpg'
 
 const Home = () => {
   const {loading, data: {getCourses: {data:recentCourses} = {} } = {} } = useQuery(FETCH_5_LATEST_COURSE,{
@@ -42,31 +42,7 @@ const Home = () => {
         <Grid maxWidth='80%' container columns={12} spacing={2} justifyContent="center" mx='auto' mt={3}>
           {recentCourses?.map((course) => (
             <Grid item xs={12} sm={4} key={course.id}>
-              <Card>
-                <CardMedia
-                  component='img'
-                  height='140px'
-                  image={course?.thumbnailImg || DEFAULT_THUMBNAIL}
-                />
-                <CardContent sx={{maxHeight: '60px'}}>
-                  {course.title.length > 20 ? (
-                    <Tooltip title={course.title}>
-                      <Typography variant="h6" component="div">
-                        {course.title.slice(0,24)} ...
-                      </Typography>
-                    </Tooltip>
-                  ) : (
-                    <Typography variant="h6" component="div">
-                      {course.title}
-                    </Typography>
-                  )}
-                </CardContent>
-                <CardActions sx={{justifyContent: 'end'}}>
-                  <Button fullWidth size="small" variant='contained' sx={{textTransform:'none'}} disableElevation>
-                    Rp. {course.price}
-                  </Button>
-                </CardActions>
-              </Card>
+              <CourseCard course={course}/>
             </Grid>
           ))}
         </Grid>

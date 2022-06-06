@@ -6,24 +6,23 @@ const DEFAULT_THUMBNAIL = 'https://res.cloudinary.com/grand-canyon-university/im
 const CourseCard = ({course}) => {
   const [tutorChipHover,setTutorChipHover] = useState(false);
   return (
-    <Card>
+    <Card sx={{height:'100%', display:'flex', flexDirection:'column'}}>
       <CardMedia
         component='img'
         height='140px'
         image={course?.thumbnailImg || DEFAULT_THUMBNAIL}
       />
-      <CardContent sx={{maxHeight: '60px'}}>
-        {course.title.length > 20 ? (
-          <Tooltip title={course.title}>
-            <Typography variant="h6" component="div">
-              {course.title.slice(0,24)} ...
-            </Typography>
-          </Tooltip>
-        ) : (
+      <CardContent sx={{flexGrow:1}}>
+        <Tooltip
+          arrow
+          followCursor
+          placement='top-start'
+          title={course.title}
+        >
           <Typography variant="h6" component="div">
-            {course.title}
+            {course.title.slice(0, 24)}
           </Typography>
-        )}
+        </Tooltip>
       </CardContent>
       <CardActions sx={{justifyContent: "space-between"}}>
         <Chip

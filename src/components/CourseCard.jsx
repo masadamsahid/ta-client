@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {Avatar, Button, Card, CardActions, CardContent, CardMedia, Chip, Tooltip, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 const DEFAULT_THUMBNAIL = 'https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces,q_auto/https://www.gcu.edu/sites/default/files/2020-09/programming.jpg'
 
 const CourseCard = ({course}) => {
   const [tutorChipHover,setTutorChipHover] = useState(false);
+  const [priceBtnHover,setPriceBtnHover] = useState(false);
+
   return (
     <Card sx={{height:'100%', display:'flex', flexDirection:'column'}}>
       <CardMedia
@@ -34,9 +37,18 @@ const CourseCard = ({course}) => {
           onMouseEnter={()=>setTutorChipHover(true)}
           onMouseLeave={()=>setTutorChipHover(false)}
         />
-        <Button size="small" sx={{textTransform:'none'}} disableElevation>
-          Lihat Kelas
-        </Button>
+        <Link className='text-link' to={`/courses/${course.courseCode}`}>
+          <Button
+            size="small"
+            variant={priceBtnHover ? 'contained' : 'outlined'}
+            sx={{textTransform:'none'}}
+            disableElevation
+            onMouseEnter={()=>setPriceBtnHover(true)}
+            onMouseLeave={()=>setPriceBtnHover(false)}
+          >
+            {priceBtnHover ? 'Lihat Kelas' : `Rp. ${course.price},-`}
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

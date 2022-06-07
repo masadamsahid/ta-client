@@ -7,6 +7,7 @@ import MainNavBar from "./components/MainNavBar";
 import CoursesPage from "./pages/CoursesPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/Footer";
+import CourseDetailPage from "./pages/CourseDetailPage";
 
 const MainPages = () => {
   return (
@@ -16,6 +17,7 @@ const MainPages = () => {
         <Routes>
           <Route path='/about' exact element={<AboutUsPage/>}/>
           <Route path='/courses' exact element={<CoursesPage/>}/>
+          <Route path='/courses/:courseCode' exact element={<CourseDetailPage/>}/>
           <Route path='/' element={<Home/>}/>
         </Routes>
       </Box>

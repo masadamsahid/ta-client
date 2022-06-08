@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Container, Grid, Pagination, Stack, Typography} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import {Container, Grid, LinearProgress, Pagination, Stack, Typography} from "@mui/material";
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import CourseCard from "../components/CourseCard";
@@ -9,41 +9,63 @@ const CoursesPage = () => {
   const [page,setPage] = useState(1);
   const [courses,setCourses] = useState([]);
 
-  const {loading, data: {getCourses: {data,count} = {} } = {} } = useQuery(FETCH_5_LATEST_COURSE,{
+  const {loading, refetch, data: {getCourses: {data,count} = {} } = {} } = useQuery(FETCH_5_LATEST_COURSE,{
+    notifyOnNetworkStatusChange: true,
     variables: {
       page: page,
       pageSize: 8,
     }
   })
+
+  useEffect(()=>{
+    refetch();
+  },[page])
+
   console.log(count, 'course:\n', courses);
   console.log(loading, data);
 
   return (
     <Container maxWidth="xl" sx={{minHeight:'85vh', display:'flex', justifyContent: 'center'}}>
-      <Stack alignItems='center' width='100%'>
-        <Typography variant='h3' fontWeight={300} mt={4}>
+      <Stack
+        width='100%'
+        alignItems='center'
+        justifyContent='space-between'
+        gap={2}
+        my={2}
+      >
+        <Typography variant='h3' fontWeight={300}>
           Sambut skill masa depanmu!
         </Typography>
 
-        <Grid
-          container
-          columns={10}
-          gap={2}
-          justifyContent="center"
-          mx='auto'
-          mt={3}
-          mb={3}
-        >
-          {data?.map((course) => (
-            <Grid item xs={12} sm={2} key={course.id}>
-              <CourseCard course={course}/>
-            </Grid>
-          ))}
-        </Grid>
+        {loading ? (
+          <Stack width='60%'>
+            <Typography variant='h4'align='center'>
+              Loading
+            </Typography>
+            <LinearProgress/>
+          </Stack>
+        ):(
+          <Grid
+            container
+            columns={10}
+            gap={2}
+            justifyContent="center"
+            mx='auto'
+          >
+            {data?.map((course) => (
+              <Grid item xs={12} sm={2} key={course.id}>
+                <CourseCard course={course}/>
+              </Grid>
+            ))}
+          </Grid>
+        )}
 
         <Pagination
-          count={Math.ceil(count/10)}
+          page={page}
+          count={Math.ceil(count/8)}
+          disabled={loading}
           onChange={(e,value) => setPage(value)}
+          color='primary'
         />
       </Stack>
     </Container>

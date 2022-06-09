@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import {
@@ -17,12 +17,16 @@ import {
 import ReactMarkdown from "react-markdown";
 
 import supportedPaymentImg from '../assets/supported-payment.png';
+import {useSelector} from "react-redux";
 
 const DEFAULT_THUMBNAIL = 'https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces,q_auto/https://www.gcu.edu/sites/default/files/2020-09/programming.jpg'
 
 const CourseDetailPage = () => {
+  const navigate = useNavigate()
 
   const {courseCode} = useParams();
+
+  const {selfUser} = useSelector(store => store.auth)
 
   const [paymentBtnHovered,setPaymentBtnHovered] = useState(false);
 
@@ -50,6 +54,10 @@ const CourseDetailPage = () => {
 
   function handleCreateCourseOrder(){
     createOrder();
+  }
+
+  function handleRedirectLogin() {
+    navigate('/login');
   }
 
   return (
@@ -129,7 +137,7 @@ const CourseDetailPage = () => {
                           variant={paymentBtnHovered ? 'contained' : 'outlined'}
                           onMouseEnter={()=>setPaymentBtnHovered(true)}
                           onMouseLeave={()=>setPaymentBtnHovered(false)}
-                          onClick={handleCreateCourseOrder}
+                          onClick={selfUser ? handleCreateCourseOrder : handleRedirectLogin}
                           disableElevation
                         >
                           {paymentBtnHovered ? 'BELI KELAS' : `Rp. ${course?.price},-`}

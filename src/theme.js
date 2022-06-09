@@ -9,5 +9,8 @@ export const theme = createTheme({
     black: {
       main: grey[900]
     },
+    dracula: {
+      main: 'rgb(6,15,47)'
+    }
   }
 })

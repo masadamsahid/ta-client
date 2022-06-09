@@ -145,7 +145,7 @@ const CourseDetailPage = () => {
                             onMouseLeave={()=>setPaymentBtnHovered(false)}
                             disableElevation
                             sx={{textAlign:'center'}}
-                            to='/'
+                            to={`/learning/${courseCode}/1`}
                           >
                             MULAI BELAJAR
                           </Button>

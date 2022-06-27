@@ -30,7 +30,7 @@ export const FETCH_COURSE_DETAILS = gql`
         id username about email createdAt fullName
       }
       topics{
-        id topicTitle orderNo videoUrl body createdAt lastUpdated
+        id topicTitle orderNo videoId body createdAt lastUpdated
       }
       thumbnailImg
       createdAt

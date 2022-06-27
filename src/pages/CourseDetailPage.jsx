@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
-import gql from "graphql-tag";
+
 import {
-  Avatar, Badge,
+  Avatar,
   Button,
   Card, CardActions,
   CardContent,
@@ -15,6 +15,11 @@ import {
   Typography
 } from "@mui/material";
 import ReactMarkdown from "react-markdown";
+
+import {
+  FETCH_COURSE_DETAILS,
+  CREATE_COURSEORDER_MUTATION,
+} from "../utils/apollo";
 
 import supportedPaymentImg from '../assets/supported-payment.png';
 import {useSelector} from "react-redux";
@@ -209,49 +214,5 @@ const CourseDetailPage = () => {
     </Container>
   );
 };
-
-const FETCH_COURSE_DETAILS = gql`
-  query getCourse ($courseCode: String){
-    getCourse(courseCode: $courseCode){
-      id title courseCode description price
-      tutor {
-        id username about email createdAt fullName
-      }
-      topics{
-        id topicTitle orderNo videoUrl body createdAt lastUpdated
-      }
-      thumbnailImg
-      createdAt
-      courseOrder{
-        id
-        orderId
-        midtransStatus
-        courseAccess
-        amount
-        createdAt
-        updatedAt
-        midtransToken
-        redirectUrl
-      }
-    }
-  }
-`
-
-const CREATE_COURSEORDER_MUTATION = gql`
-  mutation createCourseOrder($courseCode: String!){
-    createCourseOrder(courseCode:$courseCode) {
-      id
-      orderId
-      midtransStatus
-      courseAccess
-      amount
-      createdAt
-      updatedAt
-      midtransToken
-      redirectUrl
-    }
-  }
-
-`
 
 export default CourseDetailPage;

@@ -97,7 +97,7 @@ const LearningPage = () => {
                   >
                     <ListItemAvatar>
                       <Avatar sx={{bgcolor: 'rgba(0,0,0,0.4)'}} variant='rounded'>
-                        {course?.topics?.videoUrl ? <Movie/> : <Article/>}
+                        {course?.topics?.videoId ? <Movie/> : <Article/>}
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
@@ -116,7 +116,7 @@ const LearningPage = () => {
                 style={{margin: "2em 0", borderRadius: '10px'}}
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/${course?.topics?.filter(t => t.orderNo === parseInt(orderNo))[0]?.videoUrl}`}
+                src={`https://www.youtube.com/embed/${course?.topics?.filter(t => t.orderNo === parseInt(orderNo))[0]?.videoId}`}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

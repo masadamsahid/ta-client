@@ -3,13 +3,13 @@ import {Container, Grid, LinearProgress, Pagination, Stack, Typography} from "@m
 import {useQuery} from "@apollo/client";
 import gql from "graphql-tag";
 import CourseCard from "../components/CourseCard";
+import {FETCH_COURSES} from "../utils/apollo";
 
 const CoursesPage = () => {
 
   const [page,setPage] = useState(1);
-  const [courses,setCourses] = useState([]);
 
-  const {loading, refetch, data: {getCourses: {data,count} = {} } = {} } = useQuery(FETCH_5_LATEST_COURSE,{
+  const {loading, refetch, data: {getCourses: {data,count} = {} } = {} } = useQuery(FETCH_COURSES,{
     notifyOnNetworkStatusChange: true,
     variables: {
       page: page,
@@ -21,7 +21,7 @@ const CoursesPage = () => {
     refetch();
   },[page])
 
-  console.log(count, 'course:\n', courses);
+  console.log(count);
   console.log(loading, data);
 
   return (
@@ -71,26 +71,5 @@ const CoursesPage = () => {
     </Container>
   );
 };
-
-const FETCH_5_LATEST_COURSE = gql`
-  query ($page: Int!, $pageSize: Int!){
-    getCourses(page:$page, pageSize:$pageSize){
-      count
-      data {
-        id courseCode title description
-        description createdAt price thumbnailImg
-
-        tutor {
-          id username email role about createdAt
-        }
-
-        topics {
-          id orderNo topicTitle
-        }
-
-      }
-    }
-  }
-`
 
 export default CoursesPage;

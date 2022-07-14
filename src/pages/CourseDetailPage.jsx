@@ -145,7 +145,11 @@ const CourseDetailPage = () => {
                           onClick={selfUser ? handleCreateCourseOrder : handleRedirectLogin}
                           disableElevation
                         >
-                          {paymentBtnHovered ? 'BELI KELAS' : `Rp. ${course?.price},-`}
+                          {paymentBtnHovered ? 'BELI KELAS' : course?.isDiscounted ? (
+                            <>
+                              <s>Rp. {course?.price}</s> &nbsp; Rp. {course?.discountedPrice}
+                            </>
+                          ) : `Rp. ${course?.price},-`}
                         </Button>
                       ):(
                         course?.courseOrder.courseAccess ? (

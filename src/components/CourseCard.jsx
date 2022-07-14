@@ -15,7 +15,7 @@ const CourseCard = ({course}) => {
         height='140px'
         image={course?.thumbnailImg || DEFAULT_THUMBNAIL}
       />
-      <CardContent sx={{flexGrow:1}}>
+      <CardContent sx={{flexGrow:1, p:1}}>
         <Tooltip
           arrow
           followCursor
@@ -26,30 +26,40 @@ const CourseCard = ({course}) => {
             {course.title.slice(0, 24)}
           </Typography>
         </Tooltip>
-      </CardContent>
-      <CardActions sx={{justifyContent: "space-between"}}>
         <Chip
           color='warning'
-          variant={tutorChipHover ? 'filled' : 'outlined'}
+          // variant={tutorChipHover ? 'filled' : 'outlined'}
           size='small'
           label={course.tutor.username}
           avatar={<Avatar children={course.tutor.username[0]} color='primary'/>}
           onMouseEnter={()=>setTutorChipHover(true)}
           onMouseLeave={()=>setTutorChipHover(false)}
         />
-        <Link className='text-link' to={`/courses/${course.courseCode}`}>
-          <Button
-            size="small"
-            variant={priceBtnHover ? 'contained' : 'outlined'}
-            sx={{textTransform:'none'}}
-            disableElevation
-            onMouseEnter={()=>setPriceBtnHover(true)}
-            onMouseLeave={()=>setPriceBtnHover(false)}
-          >
-            {priceBtnHover ? 'Lihat Kelas' : `Rp. ${course.price},-`}
-          </Button>
-        </Link>
+      </CardContent>
+      <CardActions sx={{justifyContent: "space-between"}}>
+        <Button
+          fullWidth
+          className='text-link'
+          href={`/courses/${course.courseCode}`}
+
+          variant={priceBtnHover ? 'contained' : 'outlined'}
+          sx={{textTransform:'none'}}
+          disableElevation
+          onMouseEnter={()=>setPriceBtnHover(true)}
+          onMouseLeave={()=>setPriceBtnHover(false)}
+        >
+          {priceBtnHover ? 'Lihat Kelas' : course.isDiscounted ? `Rp. ${course.discountedPrice},-` : `Rp. ${course.price},-`}
+        </Button>
       </CardActions>
+      {course?.isDiscounted && (
+        <Button
+          fullWidth
+          disabled
+          size='small'
+        >
+          Harga awal &nbsp; <s><b>Rp. {course?.price}</b></s>
+        </Button>
+      )}
     </Card>
   );
 };

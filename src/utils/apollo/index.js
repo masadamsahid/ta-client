@@ -7,16 +7,13 @@ export const FETCH_COURSES = gql`
       count
       data {
         id courseCode title description
-        description createdAt price thumbnailImg
-
+        description createdAt price discountedPrice isDiscounted thumbnailImg
         tutor {
           id username email role about createdAt
         }
-
         topics {
           id orderNo topicTitle
         }
-
       }
     }
   }
@@ -25,7 +22,7 @@ export const FETCH_COURSES = gql`
 export const FETCH_COURSE_DETAILS = gql`
   query getCourse ($courseCode: String!){
     getCourse(courseCode: $courseCode){
-      id title courseCode description price
+      id title courseCode description price discountedPrice isDiscounted
       tutor {
         id username about email createdAt fullName
       }

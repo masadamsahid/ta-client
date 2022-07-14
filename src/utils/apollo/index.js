@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 // QUERIES
 export const FETCH_COURSES = gql`
-  query ($page: Int, $pageSize: Int){
+  query ($page: Int!, $pageSize: Int!){
     getCourses(page:$page, pageSize:$pageSize){
       count
       data {
@@ -23,7 +23,7 @@ export const FETCH_COURSES = gql`
 `
 
 export const FETCH_COURSE_DETAILS = gql`
-  query getCourse ($courseCode: String){
+  query getCourse ($courseCode: String!){
     getCourse(courseCode: $courseCode){
       id title courseCode description price
       tutor {

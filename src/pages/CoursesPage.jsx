@@ -73,7 +73,7 @@ const CoursesPage = () => {
 };
 
 const FETCH_5_LATEST_COURSE = gql`
-  query ($page: Int, $pageSize: Int){
+  query ($page: Int!, $pageSize: Int!){
     getCourses(page:$page, pageSize:$pageSize){
       count
       data {
